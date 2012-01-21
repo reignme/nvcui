@@ -1,0 +1,259 @@
+header {
+	background-color:gray;
+	height: 44px;
+	overflow: hidden;
+	padding: 5px 30px 0;
+	width: 900px;
+	z-index: 1000;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+header h1 {
+	float: left;
+	height: 41px;
+	width: 102px;
+	padding: 0 16px;
+}
+nav ul {
+	list-style-type: none;
+	float: right;
+}
+nav ul li {
+	background: none;
+	float: left;
+	height: 40px;
+	line-height: 20px;
+	margin-left: 20px;
+	padding: 0;
+}
+nav ul li.spacer {
+	padding-right: 15px;
+	background: url("/nvcui/img/spacer.png") center no-repeat;
+}
+nav ul li a {
+	color: #FFFFFF;
+	font-size: 25px;
+	text-transform: uppercase;
+	font-weight:bold;
+	text-decoration: none;
+}
+nav ul li a:hover {
+	color: #e34c37;
+	text-decoration: none;
+}
+nav ul li a:active {
+	top: 1px;
+	position: relative;
+	text-shadow: 0px 0px 0px #000;
+}
+
+h2
+{
+	margin-left:20px;
+	color:#888888;
+}
+body 
+{
+  
+  
+  color: #000;
+  margin: 0px;
+  font-size: 12px;
+  font-family:굴림, Gulim, AppleGothic, sans-serif;
+}
+
+#bodyWrapper 
+{
+	width: 960px;
+	margin:30px;
+	border:solid 1px gray;
+	border-radius: 10px 10px 10px 10px;
+	background-color:white;
+	padding:10px;
+	background: none repeat scroll 0 0 #FFFFFF;
+	border-color: #E5E5E5 #DBDBDB #D2D2D2;
+	border-style: solid;
+	border-width: 1px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+	min-height: 500px;
+	margin-left: auto;
+    margin-right: auto;
+}
+#main
+{
+	margin-left:50px;
+	margin-top:50px;
+}
+#groupList {width:90%;}
+
+.nvcList {border:1px solid black;}
+
+.nvcListHeader { background-color:gray; }
+
+.nvcListHeader th {color:white; width:100px; text-align:center;}
+
+.nvcListRow {}
+.nvcListRow td {width:100px; height:20px; text-align:center;}
+
+table {
+	font: 11px/24px Verdana, Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	width: 320px;
+	}
+
+th {
+	padding: 0 0.5em;
+	text-align: left;
+	}
+
+tr.yellow td {
+	border-top: 1px solid #FB7A31;
+	border-bottom: 1px solid #FB7A31;
+	background: #FFC;
+	}
+
+td {
+	border-bottom: 1px solid #CCC;
+	padding: 0 0.5em;
+	}
+
+td:first-child {
+	width: 190px;
+	}
+
+td+td {
+	border-left: 1px solid #CCC;
+	text-align: center;
+	}
+
+option
+{
+	background-color:#d0e4fe;
+	border: 1px solid #FFFFFF;
+}
+
+select
+{
+	background-color:#d0e4fe;
+	border: 1px solid #FFFFFF;
+}
+
+.family_even
+{
+	 background-color: #D0E4FE;
+}
+
+.family_odd
+{
+	 background-color: #FFFFFF;
+}
+
+a.button 
+{
+    background: url("/nvcui/img/bg_button_a.gif") no-repeat scroll right top transparent;
+    color: #444444;
+    display: block;
+    float: left;
+    font: 12px arial,sans-serif;
+    height: 24px;
+    margin-right: 6px;
+    padding-right: 18px;
+    text-decoration: none;
+}
+
+a.button span {
+    background: url("/nvcui/img/bg_button_span.gif") no-repeat scroll 0 0 transparent;
+    display: block;
+    line-height: 14px;
+    padding: 5px 0 5px 18px;
+}
+
+
+/*
+*	Setup
+*/
+ul.cssmenu {
+	list-style: none;
+	padding: 0px;
+	}
+
+.displace {
+	position: absolute;
+	left: -5000px;
+	}
+
+ul.cssmenu li {
+	float: left;
+	}
+
+ul.cssmenu li a {
+	display: block;
+	width: 150px;
+	height: 44px;
+	background: url('sprite.gif');
+	}
+
+/*
+*	Normal Links
+*/
+ul.cssmenu li.home a {
+	background-position: 0 0;
+	}
+
+ul.cssmenu li.blog a {
+	background-position: -150px 0;
+	}
+
+ul.cssmenu li.contact a {
+	background-position: -300px 0;
+	}
+
+/*
+*	Hover Links
+*/
+ul.cssmenu li.home a:hover {
+	background-position: 0 -44px;
+	}
+
+ul.cssmenu li.blog a:hover {
+	background-position: -150px -44px;
+	}
+
+ul.cssmenu li.contact a:hover {
+	background-position: -300px -44px;
+	}
+
+/*
+*	Clicked Links
+*/
+ul.cssmenu li.home a:active {
+	background-position: 0 -88px;
+	}
+
+ul.cssmenu li.blog a:active {
+	background-position: -150px -88px;
+	}
+
+ul.cssmenu li.contact a:active {
+	background-position: -300px -88px;
+	}
+
+/*
+*	Selected/Active Links
+*/
+ul.cssmenu li.home a.selected {
+	background-position: 0 -132px;
+	}
+
+ul.cssmenu li.blog a.selected {
+	background-position: -150px -132px;
+	}
+
+ul.cssmenu li.contact a.selected {
+	background-position: -300px -132px;
+	}
+
+
+
+
