@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx = "http://www.springframework.org/schema/tx" 
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx.xsd
+	http://www.springframework.org/schema/util
+	http://www.springframework.org/schema/util/spring-util-3.0.xsd
+	">
+	
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:nvcui.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<util:properties id="nvcProperties" location="classpath:nvcui.properties"/>
+	 
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName"><value>${nvc.jdbc.driver}</value></property>
+		<property name="url"><value>${nvc.jdbc.url}?characterEncoding=UTF-8&amp;noDatetimeStringSync=true&amp;zeroDateTimeBehavior=convertToNull&amp;jdbcCompliantTruncation=false</value></property>
+		<property name="username"><value>${nvc.jdbc.user}</value></property>
+		<property name="password"><value>${nvc.jdbc.password}</value></property>
+		<property name="initialSize" value="2" />
+		<property name="maxActive" value="20" />
+		<property name="maxIdle" value="2" />
+		<property name="validationQuery" value="select 1"/>
+		<property name="testOnBorrow" value="true"/>
+		<property name="testOnReturn" value="false"/>
+	</bean>
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource">
+			<ref bean="dataSource"/>
+		</property>
+	</bean>
+	<bean id="jdbcTemplateMaster"
+		class="org.springframework.jdbc.core.JdbcTemplate" >
+		<property name="dataSource">
+			<ref bean="dataSource"/>
+		</property>
+	</bean>
+	
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+     		<property name="basename" value="MessageResources"/>
+	</bean>
+	
+	<context:component-scan base-package="org.nvc.ui"/>
+
+ </beans>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  - Sample namespace-based configuration
+  -
+  -->
+
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+
+    <global-method-security secured-annotations="enabled"/>
+
+    <http use-expressions="true">
+        <intercept-url pattern="/secure/extreme/**" access="hasRole('ROLE_SUPERVISOR')"/>
+        <intercept-url pattern="/login" access="permitAll" />
+        <intercept-url pattern="/member/*" access="isAuthenticated()"/>
+        <intercept-url pattern="/group/list" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/css/**" access="permitAll" />
+        <intercept-url pattern="/js/**" access="permitAll" />
+        <intercept-url pattern="/img/**" access="permitAll" />
+        <intercept-url pattern="/**" access="isAuthenticated()" />
+        
+        
+        <form-login  
+        	login-page="/login"  
+        	default-target-url='/' 
+        	always-use-default-target='true'
+        	authentication-failure-url="/login?login_error=1" />
+        <logout />
+        <remember-me />
+        
+        <session-management invalid-session-url="/timeout.jsp"/>
+
+    </http>
+
+    <authentication-manager>
+    	<authentication-provider user-service-ref='LoginDaoRemoteService'>
+    		<password-encoder hash="md5" />
+    	</authentication-provider>  
+    </authentication-manager>
+    
+    <beans:bean id="LoginDaoRemoteService"
+      class="org.nvc.ui.login.dao.LoginDaoRemoteService">
+	</beans:bean>
+	
+
+</beans:beans>

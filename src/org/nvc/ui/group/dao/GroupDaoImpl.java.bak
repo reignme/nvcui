@@ -1,0 +1,126 @@
+package org.nvc.ui.group.dao;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
+import org.nvc.ui.common.dao.BaseDao;
+import org.nvc.ui.common.model.Address;
+import org.nvc.ui.common.util.JsonUtil;
+import org.nvc.ui.group.model.Community;
+import org.nvc.ui.group.model.Group;
+import org.nvc.ui.member.model.Member;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
+
+@Repository("groupDao")
+public class GroupDaoImpl extends BaseDao implements GroupDao 
+{
+	
+	private static final String getGroupAll = 
+		"SELECT g . * , max( birth_date ) max_age , min( birth_date ) min_age, c.member_id c_id, c.korean_name c_name, c.cell_phone c_cellPhone, c.email c_email, s.member_id  s_id, s.korean_name s_name, s.cell_phone s_cell_phone, s.email s_email "+
+		"FROM member m, groups g "+
+		"LEFT JOIN "+
+		"( "+
+			"SELECT member_id, group_id, korean_name, cell_phone, email "+
+			"FROM member "+
+			"WHERE group_id =1 "+
+			"AND role_id =2 limit 1"+
+		") "+
+		"c ON c.group_id = g.group_id "+
+		"left join "+
+		"( "+
+			"SELECT member_id, group_id, korean_name, cell_phone, email "+
+			"FROM member "+
+			"WHERE group_id =1 "+
+			"AND role_id =3  limit 1"+
+		") "+
+		"s on s.group_id = g.group_id "+
+		"WHERE m.group_id = g.group_id "+
+		"AND g.group_id =1 ";
+	
+	
+	public List<Group> getAll()
+	{
+		return (List<Group>)this.getJdbcTemplate().query(getGroupAll, new Object[]{}, new GroupMapper());
+	}
+	
+	public Group get(long groupId)
+	{
+		Group test1 = new Group();
+		
+		test1.setGroupId(1);
+		test1.setName("1-1");
+		test1.setNumberOfMember(10);
+		test1.setShepherdEmailAddress("test1@yahoo.com");
+		test1.setShepherdId(22);
+		test1.setShepherdName("김갑수");
+		test1.setShepherdPhoneNumber("408-303-0303");
+		test1.setCommunityId(1);
+		test1.setCommunityName("사랑");
+		test1.setCommunityHeadId(22);
+		test1.setCommunityHeadName("박지만");
+		test1.setRoomNumber(217);
+		test1.setAgeGroup("45 ~ 50");
+		test1.setNumberOfFamily(12);		
+		return test1;
+	}
+	
+	public void save(Group group)
+	{
+		String jsonGroup = JsonUtil.generateJson(group);
+		
+		System.out.println(jsonGroup);
+	}
+
+	public Community[] getCommunity() 
+	{
+		Community[] communityList = new Community[3];
+		
+		Community c1 = new Community();
+		
+		c1.setName("믿음마을");
+		
+		communityList[0] = c1;
+		
+		Community c2 = new Community();
+		//c2.setCommunityHeadId(2);
+		c2.setName("사랑마을");
+		
+		communityList[1] = c2;
+		
+		Community c3 = new Community();
+		//c3.setCommunityHeadId(3);
+		c3.setName("은혜마을");
+		
+		communityList[2] = c3;
+		
+		return communityList;
+	}
+	
+	class GroupMapper implements RowMapper<Group>
+	{
+		public Group mapRow(ResultSet rs, int arg1) throws SQLException 
+		{
+			Group group = new Group();
+			group.setGroupId(rs.getInt("group_id"));
+			group.setName(rs.getString("name"));
+			group.setRoomNumber(rs.getInt("room_number"));
+			
+			
+			group.setAgeGroup(DateUtil.getAge(rs.getString("min_age")) + " " + DateUtil.getAge(rs.getString("max_age")));
+			group.setShepherdEmailAddress(rs.getString("s_email"));
+			group.setShepherdId(rs.getLong("s_id"));
+			group.setShepherdPhoneNumber(rs.getString("s_cellPhone"));
+			//c.member_id c_id, c.korean_name c_name, c.cell_phone c_cellPhone, c.email c_email
+			
+			group.setCommunityHeadId(rs.getLong("c_id"));
+			group.setCommunityHeadName(rs.getString("s_name"));
+			group.setCommunityHeadEmailAddress(rs.getString("c_email"));
+			
+			return group;
+		}
+		
+	}
+	
+}
