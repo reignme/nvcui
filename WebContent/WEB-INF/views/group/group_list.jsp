@@ -24,7 +24,8 @@
 		<th>목자</th>
 		<th>목자 전화번호</th>
 		<th>이메일</th>
-		<th></th>
+		<th>목원 리스트</th>
+		<th>출석 체크하기</th>
 	</tr>
 	
 <c:forEach items="${groupList}" var="grp" varStatus="index"> 
@@ -32,12 +33,13 @@
 		<td><a href="/nvcui/group/edit/<c:out value="${grp.groupId}"/>"><c:out value="${grp.name}" /></a></td>
 		<td><c:out value="${grp.communityHeadName}" /></td>
 		<td><c:out value="${grp.roomNumber}" /></td>
-		<td><c:out value="${grp.numberOfFamily}" /></td>
+		<td><c:out value="${grp.numberOfMember}" /></td>
 		<td><c:out value="${grp.ageGroup}" /></td>
 		<td><a href="/nvcui/member/edit/<c:out value="${grp.shepherdId}"/>"><c:out value="${grp.shepherdName}" /></a></td>
 		<td><c:out value="${grp.shepherdPhoneNumber}" /></td>
 		<td><c:out value="${grp.shepherdEmailAddress}" /></td>
 		<td><a href="/nvcui/group/view/<c:out value="${grp.groupId}" />">목원들 보기</a></td>
+		<td><a href="/nvcui/group/attendance/<c:out value="${grp.groupId}" />"/>출석</a></td>
 	</tr>
 </c:forEach>
 

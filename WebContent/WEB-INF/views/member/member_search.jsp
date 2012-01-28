@@ -12,7 +12,7 @@
 	<div id="searchFieldPanel">
 		<form:form commandName="memberSearch" action="${pageContext.request.contextPath}/member/search/process">
 			<div class="display_error"><form:errors path="name"/><!-- --></div>
-			<div class="form_lable"><form:radiobutton path="searchField" value="name"/>이름(name):</div>
+			<div class="form_lable"><form:radiobutton path="searchField" value="name" checked="checked" />이름(name):</div>
 			<div><form:input path="name" cssClass="input_text"/></div>
 			<br>
 			<div class="form_lable"><form:radiobutton path="searchField" value="registered"/>미등록 교인</div>

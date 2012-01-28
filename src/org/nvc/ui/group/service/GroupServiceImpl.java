@@ -5,6 +5,7 @@ import java.util.List;
 import org.nvc.ui.group.dao.GroupDao;
 import org.nvc.ui.group.model.Community;
 import org.nvc.ui.group.model.Group;
+import org.nvc.ui.member.model.MemberAttendance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Repository;
@@ -61,4 +62,18 @@ public class GroupServiceImpl implements GroupService
 		return groupDao.getGroupByMemberName(memberName);
 	}
 	
+	public List<MemberAttendance> getMemberAttendanceByGroupId(long groupId, String date)
+	{
+		return groupDao.getMemberAttendanceByGroupId(groupId, date);
+	}
+	
+	public void makrAttendance(long memberId, String date)
+	{
+		groupDao.makrAttendance(memberId, date);
+	}
+	
+	public void unmarkAttendance(long memberId, String date)
+	{
+		groupDao.unmarkAttendance(memberId, date);
+	}
 }

@@ -110,9 +110,9 @@ public class Member extends Person
 	public String getGenderStr()
 	{
 		if(this.getGender() == 0)
-			return "여자";
+			return "여성";
 		else
-			return "남자";
+			return "남성";
 	}
 	
 	public String getStatusStr()

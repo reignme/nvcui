@@ -31,18 +31,18 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 					</h1>
 					<ul>
 						<li>
-							<a href="/nvcui/member/new">교인 입력 하기</a>
+							<a href="/nvcui/member/new">교인입력</a>
 						</li>
 						
 						<li>
-							<a href="/nvcui/member/search">교인 찾기</a>
+							<a href="/nvcui/member/search">교인찾기</a>
 						</li>
 						<% 
 						if(!SecurityUtil.isUserInRole("ROLE_USER")) 
 						{
 						%>
 							<li>
-								<a href="/nvcui/group/list">목장 리스트</a>
+								<a href="/nvcui/group/list">목장리스트</a>
 							</li>
 						<%
 						} 
@@ -50,11 +50,17 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 						{
 						%>
 							<li>
-								<a href="/nvcui/group/view/myGroup">내 목장  보기</a>
+								<a href="/nvcui/group/view/myGroup">내목장</a>
+							</li>
+							<li>
+								<a href="/nvcui/group/myAttendance">출석 체크</a>
 							</li>
 						<%
 						} 
 						%>
+						
+						
+						
 						<li>
 							<a href="/nvcui/j_spring_security_logout">Logout</a>
 						</li>

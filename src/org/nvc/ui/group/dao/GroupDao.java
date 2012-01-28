@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.nvc.ui.group.model.Community;
 import org.nvc.ui.group.model.Group;
+import org.nvc.ui.member.model.MemberAttendance;
 
 public interface GroupDao {
 	
@@ -18,5 +19,10 @@ public interface GroupDao {
 	public List<Group> getByServiceTime(int serviceTime);
 	
 	public Group getGroupByMemberName(String memberName);
+	
+	public List<MemberAttendance> getMemberAttendanceByGroupId(long groupId, String date);
+	
+	public void makrAttendance(long memberId, String date);
+	public void unmarkAttendance(long memberId, String date);
 	
 }

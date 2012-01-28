@@ -2,9 +2,42 @@ package org.nvc.ui.common.util;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class DateUtil
 {
+	
+	public static String formatNumber(int number)
+	{
+		if(number < 10)
+			return "0"+number;
+		else
+			return number+"";
+	}
+	
+	public static String getNextSunday(Calendar cal)
+	{
+		return getSunday(cal, 1);
+	}
+	
+	public static String getPreviousSunday(Calendar cal)
+	{
+		return getSunday(cal, -1);
+	}
+	
+	private static String getSunday(Calendar cal, int direction)
+	{
+		//do a minus first since cal will be Sunday at this moment.
+		cal.add(Calendar.DAY_OF_WEEK, direction);
+		while(cal.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY) 
+		{
+			cal.add(Calendar.DAY_OF_WEEK, direction);
+		}
+		
+		String tmpMonth = formatNumber(cal.get(Calendar.MONTH) + 1 );
+		String tmpDate = formatNumber(cal.get(Calendar.DATE));
+		return cal.get(Calendar.YEAR)+"-"+tmpMonth+"-" + tmpDate;
+	}
 	
 	public static int getAge(String dob)
 	{
